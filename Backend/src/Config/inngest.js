@@ -24,15 +24,18 @@ const syncUser = inngest.createFunction(
 )
 
 const deleteUserFromDB = inngest.createFunction(
-  {id : "delete-user-from-db"},
-  {event : "user.deleted"},
-  async ({ event }) =>{
-    await connectDB()
-    const { id } = event.data
-    await User.deleteOne({ clerkId : id})
-  //  todo: DO MORE THINGS HERE
+  { id: "delete-user-from-db" },
+  { event: "clerk/user.deleted" },
+  async ({ event }) => {
+    await connectDB();
+
+    const { id } = event.data;
+
+    await User.deleteOne({ clerkId: id });
+
   }
-)
+);
+
 
 // *Create an empty array where we'll export future Inngest functions
 export const functions = [syncUser, deleteUserFromDB]
