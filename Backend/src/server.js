@@ -15,7 +15,6 @@ app.use(clerkMiddleware())
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
 app.get('/', (req,res)=>{
-    req.auth.is
     res.send("Hello world!")
 })
 
